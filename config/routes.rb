@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resource :session
+  resources :passwords, param: :token
 
   # get "/products", to: "products#index"
 
@@ -18,5 +20,16 @@ Rails.application.routes.draw do
 
   root "products#index"
 
-  resources :products
+  # resources :products
+  
+  resources :products do
+    resources :subscribers, only: [ :create ]
+  end
+
+  resource :unsubscribe, only: [ :show ]
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
+

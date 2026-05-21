@@ -1,0 +1,8 @@
+es:
+  hello: "Hola mundo"
+  products:
+    index:
+      title: "Productos"
+      new_product: "Nuevo producto"
+      login: "Iniciar sesión"   
+      logout: "Cerrar sesión"
