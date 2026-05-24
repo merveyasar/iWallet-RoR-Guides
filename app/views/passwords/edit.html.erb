@@ -1,9 +1,42 @@
-<h1>Update your password</h1>
+<% content_for :title, "Update Your Password — Email" %>
 
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<div class="min-h-[55vh] flex flex-col items-center justify-center">
+  <div class="w-full max-w-[380px] bg-white border border-[#d2d2d7] p-8 rounded-3xl shadow-sm space-y-6">
+    
+    <div class="text-center space-y-2">
+      <div class="w-10 h-10 rounded-full bg-[#1d1d1f] text-white flex items-center justify-center mx-auto font-bold text-lg select-none">
+        
+      </div>
+      <h2 class="text-2xl font-semibold tracking-tight text-[#1d1d1f]">Update Password</h2>
+      <p class="text-xs text-[#86868b]">Establish a secure passcode for your store account.</p>
+    </div>
 
-<%= form_with url: password_path(params[:token]), method: :put do |form| %>
-  <%= form.password_field :password, required: true, autocomplete: "new-password", placeholder: "Enter new password", maxlength: 72 %><br>
-  <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "Repeat new password", maxlength: 72 %><br>
-  <%= form.submit "Save" %>
-<% end %>
+    <%= form_with url: password_path(params[:token]), method: :put, class: "space-y-4" do |form| %>
+      
+      <div class="space-y-1">
+        <%= form.password_field :password, 
+            required: true, 
+            autocomplete: "new-password", 
+            placeholder: "New Password", 
+            maxlength: 72,
+            class: "w-full bg-white border border-[#d2d2d7] rounded-xl px-4 py-3 text-sm text-[#1d1d1f] placeholder-[#86868b] focus:outline-none focus:border-[#0071e3] focus:ring-1 focus:ring-[#0071e3] transition duration-200" %>
+      </div>
+
+      <div class="space-y-1">
+        <%= form.password_field :password_confirmation, 
+            required: true, 
+            autocomplete: "new-password", 
+            placeholder: "Confirm New Password", 
+            maxlength: 72,
+            class: "w-full bg-white border border-[#d2d2d7] rounded-xl px-4 py-3 text-sm text-[#1d1d1f] placeholder-[#86868b] focus:outline-none focus:border-[#0071e3] focus:ring-1 focus:ring-[#0071e3] transition duration-200" %>
+      </div>
+
+      <div class="pt-2">
+        <%= form.submit "Save Password", 
+            class: "w-full bg-[#1d1d1f] text-white text-sm font-medium py-3 rounded-xl hover:bg-black active:bg-stone-900 transition-colors duration-200 cursor-pointer shadow-sm text-center" %>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>

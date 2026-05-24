@@ -1,4 +1,18 @@
-<h1>New product</h1>
+<% content_for :title, "Add New Product — Admin" %>
 
-<%= render "form", product: @product %>
-<%= link_to "Cancel", products_path %>
+<div class="max-w-2xl mx-auto py-8 space-y-8">
+  
+  <div class="border-b border-[#d2d2d7] pb-4 space-y-1">
+    <h1 class="text-3xl font-semibold tracking-tight text-[#1d1d1f]">New Product</h1>
+    <p class="text-xs text-[#86868b]">Introduce a brand new specification item to the store collection.</p>
+  </div>
+
+  <div class="bg-white border border-[#d2d2d7] rounded-3xl p-8 shadow-sm">
+    <%= render "form", product: @product %>
+  </div>
+
+  <div class="text-center pt-2">
+    <%= link_to "Cancel and return", products_path, class: "text-xs font-medium text-[#0071e3] hover:underline" %>
+  </div>
+
+</div>

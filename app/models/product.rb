@@ -1,21 +1,15 @@
 class Product < ApplicationRecord
-    has_many :subscribers, dependent: :destroy
-    has_one_attached :featured_image
-    has_rich_text :description
-    validates :name, presence: true
+  include Notifications
 
-    validates :inventory_count, numericality: { greater_than_or_equal_to: 0 }
+  has_one_attached :featured_image
+  has_rich_text :description
 
+  validates :name, presence: true
+  validates :inventory_count, numericality: { greater_than_or_equal_to: 0 }
 
-    after_update_commit :notify_subscribers, if: :back_in_stock?
-
-    def back_in_stock?
-        inventory_count_previously_was.zero? && inventory_count.positive?
+  scope :search_by_name, ->(query) {
+    if query.present?
+      where("name LIKE ?", "%#{sanitize_sql_like(query)}%")
     end
-
-    def notify_subscribers
-        subscribers.each do |subscriber|
-        ProductMailer.with(product: self, subscriber: subscriber).in_stock.deliver_later
-        end
-    end
+  }
 end

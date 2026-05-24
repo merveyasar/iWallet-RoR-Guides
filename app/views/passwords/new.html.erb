@@ -1,8 +1,28 @@
-<h1>Forgot your password?</h1>
+<% content_for :title, "Reset Password — Email" %>
 
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<div class="min-h-[65vh] flex flex-col items-center justify-center space-y-8 py-12">
+  
+  <div class="w-full max-w-[380px] bg-white border border-[#d2d2d7] p-8 rounded-3xl shadow-sm space-y-6">
+    <div class="text-center space-y-2">
+      <h2 class="text-xl font-semibold tracking-tight text-[#1d1d1f]">Forgot Password?</h2>
+      <p class="text-xs text-[#86868b]">Enter your registered email to receive automated recovery instructions.</p>
+    </div>
 
-<%= form_with url: passwords_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.submit "Email reset instructions" %>
-<% end %>
+    <%= form_with url: passwords_path, class: "space-y-4" do |form| %>
+      <div class="space-y-1">
+        <%= form.email_field :email_address, 
+            required: true, 
+            autofocus: true, 
+            autocomplete: "username", 
+            placeholder: "Email", 
+            value: params[:email_address],
+            class: "w-full bg-white border border-[#d2d2d7] rounded-xl px-4 py-3 text-sm text-[#1d1d1f] placeholder-[#86868b] focus:outline-none focus:border-[#0071e3] focus:ring-1 focus:ring-[#0071e3] transition duration-200" %>
+      </div>
+
+      <div class="pt-2">
+        <%= form.submit "Email reset instructions", 
+            class: "w-full bg-[#0071e3] text-white text-sm font-medium py-3 rounded-xl hover:bg-[#0077ed] active:bg-[#0062c3] transition-colors duration-200 cursor-pointer shadow-sm text-center" %>
+      </div>
+    <% end %>
+  </div>
+</div>

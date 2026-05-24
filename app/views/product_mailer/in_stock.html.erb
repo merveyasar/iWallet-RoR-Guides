@@ -1,7 +1,61 @@
-<h1>Good news!</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>In Stock Notification</title>
+  </head>
+  <body style="background-color: #f5f5f7; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
 
-<p><%= link_to @product.name, product_url(@product) %> is back in stock.</p>
+    <table valign="top" width="100%" border="0" cellpadding="0" cellspacing="0" style="background-color: #f5f5f7; width: 100%; padding: 40px 20px;">
+      <tr>
+        <td align="center">
+          
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 500px; background-color: #ffffff; border: 1px solid #d2d2d7; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+            
+            <tr>
+              <td style="padding: 32px 32px 16px 32px; text-align: center;">
+                <div style="width: 36px; height: 36px; background-color: #1d1d1f; border-radius: 50%; color: #ffffff; font-size: 18px; line-height: 36px; font-weight: bold; margin: 0 auto 16px auto; user-select: none;">
+                  
+                </div>
+                <h1 style="font-size: 24px; font-weight: 600; color: #1d1d1f; margin: 0; tracking: -0.02em;">Good news!</h1>
+              </td>
+            </tr>
 
+            <tr>
+              <td style="padding: 0 32px 24px 32px; text-align: center; color: #1d1d1f; font-size: 15px; line-height: 1.5;">
+                <p style="margin: 0; color: #515154;">The item you’ve been monitoring is ready for dispatch.</p>
+                <p style="margin: 12px 0 0 0; font-weight: 500; font-size: 17px; color: #1d1d1f;"><%= @product.name %> is back in stock.</p>
+              </td>
+            </tr>
 
+            <tr>
+              <td style="padding: 0 32px 40px 32px; text-align: center;">
+                <%= link_to product_url(@product), style: "display: inline-block; background-color: #0071e3; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 500; padding: 12px 24px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,113,227,0.2);" do %>
+                  View in Store &rsaquo;
+                <% end %>
+              </td>
+            </tr>
 
-<%= link_to "Unsubscribe", unsubscribe_url(token: params[:subscriber].generate_token_for(:unsubscribe)) %>
+            <tr>
+              <td style="padding: 24px 32px; background-color: #f5f5f7; border-top: 1px solid #e8e8ed; text-align: center; font-size: 11px; color: #86868b; line-height: 1.4;">
+                <p style="margin: 0 0 8px 0;">You received this automated transactional dispatch because you registered for inventory updates regarding this hardware specifications model.</p>
+                <%= link_to "Unsubscribe from these alerts", unsubscribe_url(token: params[:subscriber].generate_token_for(:unsubscribe)), style: "color: #0071e3; text-decoration: none;" %>
+              </td>
+            </tr>
+
+          </table>
+
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" style="max-width: 500px; margin-top: 20px; text-align: center; font-size: 11px; color: #86868b;">
+            <tr>
+              <td>
+                <p style="margin: 0;">Copyright © 2026 Studio Store Archive. All rights reserved.</p>
+              </td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>

@@ -5,7 +5,11 @@ class ProductsController < ApplicationController
 
 
   def index
-    @products = Product.all
+    if params[:q].present?
+      @products = Product.search_by_name(params[:q])
+    else
+      @products = Product.all
+    end
   end
 
   def show

@@ -1,32 +1,45 @@
-<%= form_with model: product do |form| %>
+<%= form_with model: product, class: "space-y-6" do |form| %>
+  
   <% if form.object.errors.any? %>
-    <p class="error"><%= form.object.errors.full_messages.first %></p>
+    <div class="p-4 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-2xl flex items-center gap-2">
+      <span class="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0"></span>
+      <p class="font-medium"><%= form.object.errors.full_messages.first %></p>
+    </div>
   <% end %>
 
-
-  <div>
-    <%= form.label :inventory_count, style: "display: block" %>
-    <%= form.number_field :inventory_count %>
+  <div class="space-y-1">
+    <%= form.label :name, "Product Designation", class: "block text-xs font-medium text-[#1d1d1f]" %>
+    <%= form.text_field :name, 
+        placeholder: "e.g., Studio Display, Pro Stand", 
+        class: "w-full bg-white border border-[#d2d2d7] rounded-xl px-4 py-3 text-sm text-[#1d1d1f] placeholder-[#86868b] focus:outline-none focus:border-[#0071e3] focus:ring-1 focus:ring-[#0071e3] transition duration-200" %>
   </div>
 
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="space-y-1">
+    <%= form.label :inventory_count, "Inventory Allocation (Units)", class: "block text-xs font-medium text-[#1d1d1f]" %>
+    <%= form.number_field :inventory_count, 
+        min: 0,
+        placeholder: "0", 
+        class: "w-full bg-white border border-[#d2d2d7] rounded-xl px-4 py-3 text-sm text-[#1d1d1f] placeholder-[#86868b] focus:outline-none focus:border-[#0071e3] focus:ring-1 focus:ring-[#0071e3] transition duration-200" %>
   </div>
 
-  
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.rich_textarea :description %>
+  <div class="space-y-1">
+    <%= form.label :featured_image, "Asset Imagery", class: "block text-xs font-medium text-[#1d1d1f]" %>
+    <div class="w-full bg-[#f5f5f7] border border-dashed border-[#d2d2d7] rounded-2xl p-4 text-center hover:bg-[#e8e8ed] transition cursor-pointer relative">
+      <%= form.file_field :featured_image, 
+          accept: "image/*", 
+          class: "w-full text-xs text-[#86868b] file:mr-4 file:py-1.5 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-medium file:bg-[#1d1d1f] file:text-white hover:file:bg-black file:cursor-pointer" %>
+    </div>
   </div>
 
-
-  <div>
-    <%= form.label :featured_image, style: "display: block" %>
-    <%= form.file_field :featured_image, accept: "image/*" %>
+  <div class="space-y-1">
+    <%= form.label :description, "Specification Details / Documentation", class: "block text-xs font-medium text-[#1d1d1f]" %>
+    <div class="bg-white border border-[#d2d2d7] rounded-2xl p-2 focus-within:border-[#0071e3] focus-within:ring-1 focus-within:ring-[#0071e3] transition duration-200 min-h-[150px]">
+      <%= form.rich_textarea :description, class: "prose prose-stone text-sm focus:outline-none" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="pt-4 border-t border-[#f5f5f7]">
+    <%= form.submit class: "w-full bg-[#0071e3] text-white text-sm font-medium py-3 rounded-xl hover:bg-[#0077ed] active:bg-[#0062c3] transition-colors duration-200 cursor-pointer shadow-sm text-center" %>
   </div>
+
 <% end %>

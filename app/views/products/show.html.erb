@@ -1,15 +1,58 @@
-<%= image_tag @product.featured_image if @product.featured_image.attached? %>
+<% content_for :title, "#{@product.name} — Store Detail" %>
 
+<div class="space-y-8">
+  <div>
+    <%= link_to products_path, class: "text-xs font-medium text-[#0071e3] hover:underline flex items-center gap-1 group" do %>
+      <span class="text-sm transition-transform group-hover:-translate-x-0.5">‹</span> All Products
+    <% end %>
+  </div>
 
-<%= render "inventory", product: @product %>
+  <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+    
+    <div class="bg-white border border-[#d2d2d7] rounded-3xl p-8 aspect-square flex items-center justify-center overflow-hidden">
+      <% if @product.respond_to?(:featured_image) && @product.featured_image.attached? %>
+        <%= image_tag @product.featured_image, class: "max-h-full max-w-full object-contain transition duration-500 hover:scale-102" %>
+      <% elsif @product.respond_to?(:image) && @product.image.attached? %>
+        <%= image_tag @product.image, class: "max-h-full max-w-full object-contain transition duration-500 hover:scale-102" %>
+      <% else %>
+        <div class="text-center space-y-2">
+          <div class="w-16 h-16 rounded-2xl bg-[#f5f5f7] flex items-center justify-center border border-[#e8e8ed] mx-auto">
+            <span class="text-[#86868b] text-xs font-light">Box</span>
+          </div>
+          <span class="block text-xs text-[#86868b] italic">No image provided</span>
+        </div>
+      <% end %>
+    </div>
 
-<% cache @product do %>
-  <h1><%= @product.name %></h1>
-  <%= @product.description %>
-<% end %>
+    <div class="space-y-8">
+      
+      <div class="border-b border-[#d2d2d7] pb-6">
+        <span class="text-[11px] font-semibold text-[#bf4800] uppercase tracking-wider block mb-1">Hardware Specification</span>
+        <% cache @product do %>
+          <h1 class="text-3xl font-semibold tracking-tight text-[#1d1d1f] leading-tight"><%= @product.name %></h1>
+        <% end %>
+      </div>
 
-<%= link_to "Back", products_path %>
-<% if authenticated? %>
-  <%= link_to "Edit", edit_product_path(@product) %>
-  <%= button_to "Delete", @product, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-<% end %>
+      <div class="text-sm text-[#1d1d1f]/90 leading-relaxed space-y-4">
+        <% cache @product do %>
+          <%= @product.description %>
+        <% end %>
+      </div>
+
+      <div class="pt-6 border-t border-[#e8e8ed]">
+        <%= render "inventory", product: @product %>
+      </div>
+
+      <% if authenticated? %>
+        <div class="flex items-center gap-4 pt-6 border-t border-[#d2d2d7] text-xs font-normal">
+          <%= link_to "Edit Product", edit_product_path(@product), class: "bg-[#f5f5f7] text-[#1d1d1f] px-4 py-2 rounded-full border border-[#d2d2d7] hover:bg-[#e8e8ed] transition" %>
+          
+          <%= button_to "Delete Item", @product, method: :delete, 
+              data: { turbo_confirm: "Are you certain you want to remove this item from the collection?" }, 
+              class: "bg-transparent text-rose-600 hover:underline cursor-pointer border-none p-0 text-xs font-normal" %>
+        </div>
+      <% end %>
+
+    </div>
+  </section>
+</div>

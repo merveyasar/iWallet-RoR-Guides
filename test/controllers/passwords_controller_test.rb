@@ -9,12 +9,18 @@ class PasswordsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "create" do
+    # 1. Fixture'dan gelen 'one@example.com' kullanıcısını çek ve post et
     post passwords_path, params: { email_address: @user.email_address }
+    
+    # 2. BAĞLANTI NOKTASI: Arka planda bir mail kuyruğa alındı mı?
     assert_enqueued_email_with PasswordsMailer, :reset, args: [ @user ]
+    
+    # 3. Kullanıcı giriş sayfasına yönlendirildi mi?
     assert_redirected_to new_session_path
 
+    # 4. Yönlendirilen sayfaya git ve ekrandaki mesajı kontrol et
     follow_redirect!
-    assert_notice "reset instructions sent"
+    assert_select "div", /reset instructions sent/
   end
 
   test "create for an unknown user redirects but sends no mail" do

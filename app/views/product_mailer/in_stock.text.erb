@@ -1,8 +1,18 @@
+ Studio Store Archive
+=========================================
+
 Good news!
 
+The item you've been monitoring is ready for dispatch.
 <%= @product.name %> is back in stock.
+
+View the item details and secure your dispatch allocation here:
 <%= product_url(@product) %>
 
+---
+You received this automated transactional dispatch because you registered for inventory updates regarding this hardware specifications model.
 
+If you wish to stop receiving inventory alerts for this model, you can safely unsubscribe using the link below:
+<%= unsubscribe_url(token: params[:subscriber].generate_token_for(:unsubscribe)) %>
 
-Unsubscribe: <%= unsubscribe_url(token: params[:subscriber].generate_token_for(:unsubscribe)) %>
+Copyright © 2026 Studio Store Archive. All rights reserved.
